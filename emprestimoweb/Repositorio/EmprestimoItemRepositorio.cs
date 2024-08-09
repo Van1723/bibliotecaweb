@@ -17,10 +17,5 @@ namespace emprestimoweb.Repositorio
 
 
         }
-        public void FechaEmprestimo (Emprestimo objdados)
-        {
-            db.Entry(objdados).State = EntityState.Modified;
-            db.SaveChanges();
-        }
     }
 }
