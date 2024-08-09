@@ -1,0 +1,222 @@
+﻿<html>
+ <head>Lançamento</head>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            debugger;
+
+            $("#btnNovoEmprestimo").click(function () {
+                GerarNovoEmprestimo(0);
+            });
+            $("#btnAddToList").click(function () {
+                AdicionarLivro();
+
+            });
+            $("#btnFechaEmprestimo").click(function () {
+                var emprestimoId = $("#txtEmprestimoId").val();
+                var AlunoId = $("#Aluno").val();
+                var dataDevolucao = $("#txtDevolucao").val();
+
+
+                var emprestimo = {};
+                emprestimo.Codigo = emprestimoId;
+                emprestimo.aluno = AlunoId;
+                emprestimo.dataDevolucao = dataDevolucao;
+
+                $.ajax({
+                    aysnc: true,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(Item),
+                    url: '/Emprestimo/FecharEmprestimo',
+                    success: function () {
+
+                    },
+                    error: function () {
+
+                    }
+                });
+
+
+            })
+        });
+
+     function AdicionarLivro() {
+        
+         
+         var emprestimoId = $("#txtEmprestimoId").val();
+         var livroId = $("#Livro").val();
+         var LivroNome = $("#Livro option:selected").text();
+
+         var Item = {};
+         Item.EmprestimoCod = emprestimoId;
+         Item.LivroCod = livroId;
+
+        $.ajax({
+            aysnc: true,
+            type: 'POST',
+            dataType: 'JSON',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(Item),
+            url: '/Emprestimo/InserirItem',
+            success: function () {
+
+            },
+            error: function () {
+
+            }
+        });
+
+                 
+         RemoveTableRow = function (handler) {
+             var tr = $(handler).closet("tr");
+             tr.fadeOut(400, function () {
+                 tr.remove();
+
+             });
+             return false;
+         };
+
+        var newRow = $("<tr>");
+        var cols = "";
+        cols += '<td>' + livroId + '</td>';
+        cols += '<td> ' + LivroNome + '</td>';
+        cols += '<td class="actions">';
+        cols += '<button class="btn btn-large btn-danger" onclick="RemoveTableRow(this)" type="button">Remover</button>';
+        cols += '</td>';
+
+        newRow.append(cols);
+
+        $("#tbItens").append(newRow);
+
+     }
+
+    
+            
+     function GerarNovoEmprestimo(Id) {
+            $.ajax({
+                aysnc: true,
+                type: 'GET',
+                dataType: 'JSON',
+                contentType: 'application/json; charset=utf-8',
+                data: { Id: Id },
+                url: '/Emprestimo/GerarNovoEmprestimo',
+                success: function (data) {
+                    $("#txtEmprestimoId").val(parseInt(data));
+                },
+                error: function ()
+                {
+                    alert("Erro ao gerar novo empréstimo.");
+
+                }
+            });
+
+     }
+
+
+    </script>
+
+
+
+ <body>
+    <fieldset>
+        <legend>
+            Aluno
+        </legend>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="button" style="margin-top: 20px" value="Novo Emprestimo"
+                               name="NovoEmprestimo" id="btnNovoEmprestimo" class="btn btn-success" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-group">
+                            Aluno:
+                            @Html.DropDownList("Aluno", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        Emprestimo:
+                        <input type="text" readonly="readonly" id="txtEmprestimoId" value="0" name="EmprestimoId"
+                               class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        Data Emprestimo:
+                        <input type="datetime" id="txtEmprestimo" value="10/05/2022" name="dtEmprestimo"
+                               class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        Devolução:
+                        <input type="datetime" id="txtDevolucao" value="10/05/2022" name="Devolucao"
+                               class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="button"  style="margin-top: 28px"id="btnFechaEmprestimo" value="Fechar Emprestimo" class="btn btn-success" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Itens do Empréstimo</legend>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        Livros:
+                        @Html.DropDownList("Livro", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="button" value="Adicionar" name="AddToList" id="btnAddToList"
+                               class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Itens Emprestados</legend>
+        <table style="width:85%" id="tbItens">
+            <thead>
+                <tr>
+                    <th hidden> Item</th>
+                    <th> Livro</th>
+                    <th> Ações</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>1 </td>
+                <td>Senac </td>
+                <td> Excluir Alterar </td>
+            </tr>
+        </table>
+    </fieldset>
+
+ </body>
+</html>

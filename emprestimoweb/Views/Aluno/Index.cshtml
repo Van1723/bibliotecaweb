@@ -1,0 +1,71 @@
+﻿@model IEnumerable<emprestimoweb.Models.Aluno>
+
+@{
+    ViewBag.Title = "Aluno";
+}
+
+<h2>Alunos</h2>
+
+<p>
+    @Html.ActionLink("Novo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table" height="30%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Matricula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Celular)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nacionalidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cidade.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Matricula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Endereco)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Celular)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nacionalidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cidade.Nome)
+        </td>
+        <td mb-3>
+            @Html.ActionLink("Alterar", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm"})
+
+            @Html.ActionLink("Excluir", "Delete", new { id=item.Id }, new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>

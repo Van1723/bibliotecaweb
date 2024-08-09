@@ -1,0 +1,45 @@
+﻿@model IEnumerable<emprestimoweb.Models.Emprestimo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Emprestimo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Devolucao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aluno1.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Emprestimo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Devolucao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aluno1.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Codigo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Codigo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Codigo })
+        </td>
+    </tr>
+}
+
+</table>

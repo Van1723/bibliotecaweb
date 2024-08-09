@@ -1,0 +1,42 @@
+﻿@model emprestimoweb.Models.Emprestimo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Emprestimo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Emprestimo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Emprestimo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Devolucao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Devolucao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aluno1.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aluno1.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Codigo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
