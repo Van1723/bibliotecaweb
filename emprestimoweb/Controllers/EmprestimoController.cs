@@ -34,6 +34,11 @@ namespace emprestimoweb.Controllers
             objgravar.InserirItem(objdados);
         }
 
+        public void FechaEmprestimo(Emprestimo objdados)
+        {
+
+        }
+
         // GET: Emprestimo/Details/5
         public ActionResult Details(int? id)
         {
