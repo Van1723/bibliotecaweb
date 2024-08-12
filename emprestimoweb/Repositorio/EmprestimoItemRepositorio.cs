@@ -1,6 +1,7 @@
 ﻿using emprestimoweb.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -19,7 +20,7 @@ namespace emprestimoweb.Repositorio
         }
         public void FechaEmprestimo (Emprestimo objdados)
         {
-            db.Entry(objdados).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(objdados).State = EntityState.Modified;
             db.SaveChanges();
         }
     }
