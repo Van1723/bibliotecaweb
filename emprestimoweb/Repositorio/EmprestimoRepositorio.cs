@@ -19,5 +19,12 @@ namespace emprestimoweb.Repositorio
             return objinserir.Codigo;
 
         }
+
+        public void FecharEmprestimo(Emprestimo objdados)
+        {
+            objdados.Data_Emprestimo = DateTime.Now;
+            db.Entry(objdados).State = EntityState.Modified;
+            db.SaveChanges();
+        }
     }
 }
