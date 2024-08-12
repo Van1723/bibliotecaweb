@@ -34,8 +34,11 @@ namespace emprestimoweb.Controllers
             objgravar.InserirItem(objdados);
         }
 
-        public void FechaEmprestimo(Emprestimo objdados)
+        public JsonResult FechaEmprestimo(Emprestimo objdados)
         {
+            EmprestimoRepositorio objfechar = new EmprestimoRepositorio();
+            objfechar.FecharEmprestimo(objdados);
+            return Json(data:"Venda realizada com sucesso!",JsonRequestBehavior.AllowGet); 
 
         }
 
@@ -56,7 +59,7 @@ namespace emprestimoweb.Controllers
         //pagina de lançamento//
         public ActionResult Lancar()
         {
-            // passsar as infosa
+            // passsar as infos
             ViewBag.Aluno = new SelectList(db.Aluno, "Id", "Nome");
             ViewBag.Livro = new SelectList(db.Livro, "Codigo", "Titulo");
 
