@@ -1,4 +1,5 @@
-﻿<html>
+﻿
+<html>
  <head>Lançamento</head>
 
     <script src="~/Scripts/jquery-3.4.1.js"></script>
@@ -30,8 +31,8 @@
                     type: 'POST',
                     dataType: 'JSON',
                     contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(Item),
-                    url: '/Emprestimo/FecharEmprestimo',
+                    data: JSON.stringify(emprestimo),
+                    url: '/Emprestimo/FechaEmprestimo',
                     success: function () {
 
                     },
