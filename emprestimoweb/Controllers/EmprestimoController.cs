@@ -57,9 +57,14 @@ namespace emprestimoweb.Controllers
 
             return View();
         }
-
-        // GET: Emprestimo/Create
-        public ActionResult Create()
+        public JsonResult FecharEmprestimo(Emprestimo objdados)
+        {
+            EmprestimoRepositorio objfechar = new EmprestimoRepositorio();
+            objfechar.FechaEmprestimo(objdados);
+            return Json(data: "Venda realizada com sucesso!", JsonRequestBehavior.AllowGet);
+        }
+            // GET: Emprestimo/Create
+         public ActionResult Create()
         {
             ViewBag.Aluno = new SelectList(db.Aluno, "Id", "Nome");
             return View();

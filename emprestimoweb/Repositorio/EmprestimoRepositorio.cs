@@ -20,11 +20,14 @@ namespace emprestimoweb.Repositorio
 
         }
 
-        public void FecharEmprestimo(Emprestimo objdados)
+        public void FechaEmprestimo(Emprestimo objdados)
         {
             objdados.Data_Emprestimo = DateTime.Now;
             db.Entry(objdados).State = EntityState.Modified;
             db.SaveChanges();
+            
+            
         }
     }
 }
+    
